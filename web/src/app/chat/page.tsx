@@ -29,7 +29,7 @@ export default async function Page(props: {
     folders,
     toggleSidebar,
     openedFolders,
-    defaultAssistantId,
+    defaultAssistantIds,
     shouldShowWelcomeModal,
     ccPairs,
   } = data;
@@ -53,7 +53,7 @@ export default async function Page(props: {
           folders,
           openedFolders,
           shouldShowWelcomeModal,
-          defaultAssistantId,
+          defaultAssistantIds,
         }}
       >
         <WrappedChat

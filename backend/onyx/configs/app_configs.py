@@ -557,6 +557,11 @@ ENTERPRISE_EDITION_ENABLED = (
     os.environ.get("ENABLE_PAID_ENTERPRISE_EDITION_FEATURES", "").lower() == "true"
 )
 
+
+MULTIPLE_ASSISTANTS_ALLOWED = (
+    os.environ.get("MULTIPLE_ASSISTANTS_ALLOWED", "").lower() == "true"
+)
+
 # Azure DALL-E Configurations
 AZURE_DALLE_API_VERSION = os.environ.get("AZURE_DALLE_API_VERSION")
 AZURE_DALLE_API_KEY = os.environ.get("AZURE_DALLE_API_KEY")

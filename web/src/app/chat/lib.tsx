@@ -594,7 +594,7 @@ const PARAMS_TO_SKIP = [
 export function buildChatUrl(
   existingSearchParams: ReadonlyURLSearchParams,
   chatSessionId: string | null,
-  personaId: number | null,
+  personas: Persona[],
   search?: boolean
 ) {
   const finalSearchParams: string[] = [];
@@ -605,9 +605,8 @@ export function buildChatUrl(
       }=${chatSessionId}`
     );
   }
-  if (personaId !== null) {
-    finalSearchParams.push(`${SEARCH_PARAM_NAMES.PERSONA_ID}=${personaId}`);
-  }
+  const personas_list = personas.map((p) => p.id).join(",");
+  finalSearchParams.push(`${SEARCH_PARAM_NAMES.PERSONA_ID}=${personas_list}`);
 
   existingSearchParams.forEach((value, key) => {
     if (!PARAMS_TO_SKIP.includes(key)) {

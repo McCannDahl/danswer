@@ -37,7 +37,7 @@ interface FetchChatDataResult {
   llmProviders: LLMProviderDescriptor[];
   folders: Folder[];
   openedFolders: Record<string, boolean>;
-  defaultAssistantId?: number;
+  defaultAssistantIds?: number[];
   toggleSidebar: boolean;
   finalDocumentSidebarInitialWidth?: number;
   shouldShowWelcomeModal: boolean;
@@ -148,10 +148,13 @@ export async function fetchChatData(searchParams: {
     console.log(`Failed to fetch tags - ${tagsResponse?.status}`);
   }
 
-  const defaultAssistantIdRaw = searchParams["assistantId"];
-  const defaultAssistantId = defaultAssistantIdRaw
-    ? parseInt(defaultAssistantIdRaw)
+  const assistantIdsRaw = searchParams["assistantId"];
+  let defaultAssistantIds = assistantIdsRaw
+    ? assistantIdsRaw.split(",").map((id) => parseInt(id))
     : undefined;
+  if (!defaultAssistantIds || defaultAssistantIds.length == 0) {
+    defaultAssistantIds = [0];
+  }
 
   const documentSidebarCookieInitialWidth = requestCookies.get(
     DOCUMENT_SIDEBAR_WIDTH_COOKIE_NAME
@@ -198,7 +201,7 @@ export async function fetchChatData(searchParams: {
     llmProviders,
     folders,
     openedFolders,
-    defaultAssistantId,
+    defaultAssistantIds,
     finalDocumentSidebarInitialWidth,
     toggleSidebar,
     shouldShowWelcomeModal,

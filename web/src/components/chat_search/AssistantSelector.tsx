@@ -44,13 +44,13 @@ import { truncateString } from "@/lib/utils";
 import { SettingsContext } from "../settings/SettingsProvider";
 
 const AssistantSelector = ({
-  liveAssistant,
+  liveAssistants,
   onAssistantChange,
   chatSessionId,
   llmOverrideManager,
   isMobile,
 }: {
-  liveAssistant: Persona;
+  liveAssistants: Persona[];
   onAssistantChange: (assistant: Persona) => void;
   chatSessionId?: string;
   llmOverrideManager: LlmOverrideManager;
@@ -110,12 +110,13 @@ const AssistantSelector = ({
 
   const [_, currentLlm] = getFinalLLM(
     llmProviders,
-    liveAssistant,
+    liveAssistants[0],
     llmOverrideManager.llmOverride ?? null
   );
 
-  const requiresImageGeneration =
-    checkPersonaRequiresImageGeneration(liveAssistant);
+  const requiresImageGeneration = checkPersonaRequiresImageGeneration(
+    liveAssistants[0]
+  );
 
   const content = (
     <>
@@ -168,7 +169,7 @@ const AssistantSelector = ({
                     <DraggableAssistantCard
                       key={assistant.id.toString()}
                       assistant={assistant}
-                      isSelected={liveAssistant.id === assistant.id}
+                      isSelected={liveAssistants.includes(assistant)}
                       onSelect={(assistant) => {
                         onAssistantChange(assistant);
                         setIsOpen(false);
@@ -191,7 +192,7 @@ const AssistantSelector = ({
               </h3>
             </div>
             <LlmList
-              currentAssistant={liveAssistant}
+              currentAssistant={liveAssistants[0]}
               requiresImageGeneration={requiresImageGeneration}
               llmProviders={llmProviders}
               currentLlm={currentLlm}
@@ -310,10 +311,10 @@ const AssistantSelector = ({
           }}
           className="flex items-center gap-x-2 justify-between px-6 py-3 text-sm font-medium text-white bg-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
         >
-          <div className="h-4 flex gap-x-2 items-center">
-            <AssistantIcon assistant={liveAssistant} size="xs" />
-            <span className="font-bold">{liveAssistant.name}</span>
-          </div>
+          {/* <div className="h-4 flex gap-x-2 items-center">
+            <AssistantIcon assistant={liveAssistants[0]} size="xs" />
+            <span className="font-bold">{liveAssistants[0].name}</span>
+          </div> */}
           <div className="h-4 flex items-center">
             <span className="mr-2 text-xs">
               {truncateString(getDisplayNameForModel(currentLlm), 30)}
@@ -325,7 +326,7 @@ const AssistantSelector = ({
               aria-hidden="true"
             />
             <div className="invisible w-0">
-              <AssistantIcon assistant={liveAssistant} size="xs" />
+              <AssistantIcon assistant={liveAssistants[0]} size="xs" />
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import React, { useState } from "react";
 import { FiBookmark, FiImage, FiSearch } from "react-icons/fi";
 import { MdDragIndicator } from "react-icons/md";
+import { Checkbox } from "@/app/admin/settings/SettingsForm";
 
 import { Badge } from "../ui/badge";
 
@@ -103,7 +104,7 @@ export function DraggableAssistantCard(props: {
       <div {...attributes} {...listeners} className="mr-1 cursor-grab">
         <MdDragIndicator className="h-3 w-3 flex-none" />
       </div>
-
+      <Checkbox checked={props.isSelected} label={""} onChange={() => {}} />
       <AssistantCard {...props} />
     </div>
   );

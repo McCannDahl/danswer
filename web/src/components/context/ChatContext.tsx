@@ -25,7 +25,7 @@ interface ChatContextProps {
   openedFolders: Record<string, boolean>;
   shouldShowWelcomeModal?: boolean;
   shouldDisplaySourcesIncompleteModal?: boolean;
-  defaultAssistantId?: number;
+  defaultAssistantIds?: number[];
   refreshChatSessions: () => Promise<void>;
 }
 

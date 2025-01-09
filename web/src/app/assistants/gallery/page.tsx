@@ -32,7 +32,7 @@ export default async function GalleryPage(props: {
     documentSets,
     tags,
     llmProviders,
-    defaultAssistantId,
+    defaultAssistantIds,
   } = data;
 
   return (
@@ -49,7 +49,7 @@ export default async function GalleryPage(props: {
         folders,
         openedFolders,
         shouldShowWelcomeModal,
-        defaultAssistantId,
+        defaultAssistantIds,
       }}
     >
       {shouldShowWelcomeModal && (

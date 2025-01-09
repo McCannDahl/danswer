@@ -2,7 +2,6 @@ import datetime
 import json
 from typing import Any
 from typing import Literal
-from typing import NotRequired
 from typing import Optional
 from uuid import uuid4
 
@@ -1519,14 +1518,14 @@ class ChannelConfig(TypedDict):
     in Postgres"""
 
     channel_name: str
-    respond_tag_only: NotRequired[bool]  # defaults to False
-    respond_to_bots: NotRequired[bool]  # defaults to False
-    respond_member_group_list: NotRequired[list[str]]
-    answer_filters: NotRequired[list[AllowedAnswerFilters]]
+    respond_tag_only: Optional[bool]  # defaults to False
+    respond_to_bots: Optional[bool]  # defaults to False
+    respond_member_group_list: Optional[list[str]]
+    answer_filters: Optional[list[AllowedAnswerFilters]]
     # If None then no follow up
     # If empty list, follow up with no tags
-    follow_up_tags: NotRequired[list[str]]
-    show_continue_in_web_ui: NotRequired[bool]  # defaults to False
+    follow_up_tags: Optional[list[str]]
+    show_continue_in_web_ui: Optional[bool]  # defaults to False
 
 
 class SlackChannelConfig(Base):
